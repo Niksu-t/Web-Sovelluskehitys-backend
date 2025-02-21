@@ -95,10 +95,26 @@ const selectUserByUsername = async (username) => {
   }
 };
 
+const editUser = async (userId, user) => {
+  console.log(' Received data: ', userId, user);
+  try {
+    const [rows] = await promisePool.query(
+      'UPDATE Users SET username=?, password=?, email=? WHERE user_id=?',
+      [user.username, user.password, user.email, userId],
+    );
+    console.log(rows);
+    return rows[0];
+  } catch (error) {
+    console.error(error);
+    throw new Error('database error');
+  }
+};
+
 export {
   selectAllUsers,
   selectUserById,
   insertUser,
   selectUserByNameAndPassword,
   selectUserByUsername,
+  editUser,
 };

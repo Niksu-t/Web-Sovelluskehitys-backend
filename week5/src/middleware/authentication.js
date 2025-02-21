@@ -29,8 +29,9 @@ const checkAuthEntries = async (req, res, next) => {
     };
 };
 const checkAuthUsers = async (req, res, next) => {
-  const result = await selectUserById(req.user.user_id);
-  if(result == false){
+  const userId = req.user.user_id;
+  const targetId = req.params.id;
+  if(userId != targetId){
     res.sendStatus(401);
   }
   else {

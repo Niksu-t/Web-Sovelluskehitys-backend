@@ -63,17 +63,10 @@ const addUser = async (req, res) => {
 };
 
 // Userin muokkaus id:n perusteella (TODO: käytä DB)
-const editUser = (req, res) => {
+const updateUser = (req, res) => {
   console.log('editUser request body', req.body);
-  const user = users.find((user) => user.id == req.params.id);
-  if (user) {
-    user.username = req.body.username;
-    user.password = req.body.password;
-    user.email = req.body.email;
-    res.json({message: 'User updated.'});
-  } else {
-    res.status(404).json({message: 'User not found'});
-  }
+  const user_id = req.params.id;
+  const {username, email, password} = req.body;
 };
 
 // Userin poisto id:n perusteella (TODO: käytä DB)
@@ -91,4 +84,4 @@ const deleteUser = (req, res) => {
   }
 };
 
-export {getUsers, getUserById, addUser, editUser, deleteUser};
+export {getUsers, getUserById, addUser, updateUser, deleteUser};
