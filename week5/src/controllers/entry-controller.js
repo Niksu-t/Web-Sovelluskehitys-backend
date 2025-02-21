@@ -1,34 +1,52 @@
-import {addEntry, findEntryById, listAllEntries} from '../models/entry-model.js';
+import {deleteEntryByIds, insertEntry, selectEntriesByUserId} from '../models/entry-model.js';
 
+const postEntry = async (req, res) => {
+  // user_id, entry_date, mood, weight, sleep_hours, notes
+  // TODO: add try-catch
+  const newEntry = req.body;
+  console.log(req.body);
+  newEntry.user_id = req.user.user_id;
+  try {
+    await insertEntry(newEntry);
 
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({message: "Database error"});
+  
+  res.status(201).json({message: "Entry added."});
+  }
+};
+
+/**
+ * Get all entries of the logged in user
+ * @param {*} req
+ * @param {*} res
+ */
 const getEntries = async (req, res) => {
-    const entries = await listAllEntries();
-    res.json(entries);
+  const entries = await selectEntriesByUserId(req.user.user_id);
+  res.json(entries);
 };
 
-const getEntryById = (req, res) => {
-    const entry = findEntryById(req.params.id);
-    if (entry) {
-        res.json(entry);
-    }else {
-        res.sendStatus(404);
+const editEntry = async (req, res) => {
+    const entryId = Number(req.params.id);
+    const entry = req.body;
+    const userId = req.user.user_id;
+    try {
+     editEntry(userId, entryId, entry);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({message: "Database error"});
     }
 };
-const postEntry = (req, res) => {
-    const {user_id, entry_date, mood, weight, sleep_hours, notes} = req.body;
-    if (entry_date && (weight || mood || sleep_hours || notes) && user_id) {
-        addEntry(req.body);
-        res.status(201);
-        res.json({message: 'New entry added'});
-    } else {
-        res.sendStatus(400);
-    }
-};
-const putEntry = (req, res) => {
-    res.sendStatus(200);
+const deleteEntry = async (req, res) => {
+  console.log('Delete entry', req.params.id);
+  const entryId = req.params.id;
+  const userId = req.user.user_id;
+  try {
+    await deleteEntryByIds(userId, entryId);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: "Database error"});
+  }
 }
-const deleteEntry = (req, res) => {
-    res.sendStatus(200);
-};
-
-export {getEntries, getEntryById, postEntry, putEntry, deleteEntry};
+export {postEntry, getEntries, editEntry, deleteEntry};

@@ -3,14 +3,12 @@ import cors from 'cors';
 import {addItem, deleteItem, editItem, getItemById, getItems} from './items.js';
 
 import userRouter from './routes/user-router.js';
-import entryRouter from './routes/entry-router.js';
 import authRouter from './routes/auth-router.js';
+import entryRouter from './routes/entry-router.js';
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
 
-
-app.use(express.json());
 // middleware, mitä tarvitaan, jotta Ullan fronttiharjoitukset toimivat (Vite)
 // lisää myös: import cors from 'cors'; tiedoston yläosaan
 // ja asenna paketti: npm install cors
@@ -18,6 +16,8 @@ app.use(cors());
 
 // Staattinen html-sivusto tarjoillaan palvelimen juuressa
 app.use('/', express.static('public'));
+// middleware, joka lukee json data POST-pyyntöjen rungosta (body)
+app.use(express.json());
 
 // rest-apin resurssit tarjoillaan /api/-polun alla
 app.get('/api/', (req, res) => {
@@ -29,10 +29,11 @@ app.get('/api/', (req, res) => {
 
 // Users resurssin päätepisteet (endpoints)
 app.use('/api/users', userRouter);
-
+// käyttäjäautentikaatio (kirjautuminen)
+app.use('/api/auth', authRouter);
+// Päiväkirjamerkinnät
 app.use('/api/entries', entryRouter);
 
-app.use('/api/auth', authRouter);
 
 // Items (testi mock-data) resurssin päätepisteet (endpoints)
 app.get('/api/items', getItems);

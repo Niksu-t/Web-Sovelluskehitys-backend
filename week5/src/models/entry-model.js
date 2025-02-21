@@ -1,41 +1,59 @@
 import promisePool from '../utils/database.js';
 
-const listAllEntries = async () => {
-  const [rows] = await promisePool.query(
-    'SELECT entry_id,user_id,entry_date,mood,weight,sleep_hours,notes FROM diaryentries',
-  );
-  console.log('selectEntries result', rows);
-  return rows;
-};
-const findEntryById = async (userId) => {
+const insertEntry = async (entry) => {
   try {
-    const [rows] = await promisePool.query(
-      'SELECT entry_id,user_id,entry_date,mood,weight,sleep_hours,notes FROM diaryentries WHERE entry_id=?',
-      [userId],
+    const [result] = await promisePool.query(
+      'INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes) VALUES (?, ?, ?, ?, ? ,?)',
+      [entry.user_id, entry.entry_date, entry.mood, entry.weight, entry.sleep_hours, entry.notes],
     );
-    console.log(rows);
+    console.log('inserEntry', result);
     // return only first item of the result array
-    return rows[0];
+    return result.insertId;
   } catch (error) {
     console.error(error);
     throw new Error('database error');
   }
 };
 
-// Skeleton for inserting additional entries. Not finished.
-const addEntry = async (entry) => {
-    try {
-        const [result] = await promisePool.query(
-          'INSERT INTO diaryentries (user_id, entry_date) VALUES (?, ?, ?)',
-          [entry.userId, entry.entry_date],
-        );
-        console.log('insertEntry', result);
-        // return only first item of the result array
-        return result.insertId;
-      } catch (error) {
-        console.error(error);
-        throw new Error('database error');
-      }
+const selectEntriesByUserId = async (userId) => {
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT * FROM DiaryEntries WHERE user_id=?',
+      [userId],
+    );
+    console.log(rows);
+    return rows;
+  } catch (error) {
+    console.error(error);
+    throw new Error('database error');
+  }
 };
+const deleteEntryByIds = async (userId, entryId) => {
+  try {
+    const [rows] = await promisePool.query(
+      'DELETE FROM DiaryEntries WHERE user_id=? AND entry_id=?',
+      [userId, entryId],
+    );
+    console.log(rows);
+    return rows[0];
+  }catch (error) {
+    console.error(error);
+    throw new Error('database error');
+  }
+};
+const editEntry = async (userId, entryId, entry) => {
+  console.log(' Received data: ', userId, entryId, entry);
+  try {
+    const [rows] = await promisePool.query(
+      'UPDATE DiaryEntries SET entry_date=?, mood=?, weight=?, sleep_hours=?, notes=? WHERE user_id=? AND entry_id=?',
+      [entry.entry_date, entry.mood, entry.weight, entry.sleep_hours, entry.notes, userId, entryId],
+    );
+    console.log(rows);
+    return rows[0];
+  } catch (error) {
+    console.error(error);
+    throw new Error('database error');
+  }
+}
 
-export {listAllEntries, findEntryById, addEntry};
+export {insertEntry, selectEntriesByUserId, deleteEntryByIds, editEntry};

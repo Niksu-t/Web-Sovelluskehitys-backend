@@ -1,4 +1,9 @@
-import {insertUser, selectAllUsers, selectUserById, selectUserByNameAndPassword} from '../models/user-model.js';
+import bcrypt from 'bcryptjs';
+import {
+  insertUser,
+  selectAllUsers,
+  selectUserById,
+} from '../models/user-model.js';
 
 // kaikkien käyttäjätietojen haku
 const getUsers = async (req, res) => {
@@ -26,22 +31,30 @@ const getUserById = async (req, res) => {
 };
 
 // käyttäjän lisäys (rekisteröinti)
-// lisätään virheenkäsittely myöhemmin
+// lisätään parempi virheenkäsittely myöhemmin
 const addUser = async (req, res) => {
   console.log('addUser request body', req.body);
   // esitellään 3 uutta muuttujaa, johon sijoitetaan req.body:n vastaavien propertyjen arvot
   const {username, password, email} = req.body;
   // tarkistetaan, että pyynnössä on kaikki tarvittavat tiedot
   if (username && password && email) {
+    // luodaan selväkielisestä sanasta tiiviste, joka tallennetaan kantaan
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
     // luodaan uusi käyttäjä olio ja lisätään se tietokantaa käyttäen modelia
     const newUser = {
       username,
-      password,
+      password: hashedPassword,
       email,
     };
-    const result = await insertUser(newUser);
-    res.status(201);
-    return res.json({message: 'User added. id: ' + result});
+    try {
+      const result = await insertUser(newUser);
+      res.status(201);
+      return res.json({message: 'User added. id: ' + result});
+    } catch (error) {
+      console.error(error.message);
+      return res.status(400).json({message: 'DB error: ' + error.message});
+    }
   }
   res.status(400);
   return res.json({
@@ -49,7 +62,7 @@ const addUser = async (req, res) => {
   });
 };
 
-// Userin muokkaus id:n perusteella
+// Userin muokkaus id:n perusteella (TODO: käytä DB)
 const editUser = (req, res) => {
   console.log('editUser request body', req.body);
   const user = users.find((user) => user.id == req.params.id);
@@ -63,7 +76,7 @@ const editUser = (req, res) => {
   }
 };
 
-// Userin poisto id:n perusteella
+// Userin poisto id:n perusteella (TODO: käytä DB)
 const deleteUser = (req, res) => {
   console.log('deleteUser', req.params.id);
   const index = users.findIndex((user) => user.id == req.params.id);
@@ -78,19 +91,4 @@ const deleteUser = (req, res) => {
   }
 };
 
-// user authentication (login)
-const login = async (req, res) => {
-  console.log("Data received: ", req.body);
-  const {username, password} = req.body;
-  if (!username) {
-    return res.status(401).json({message: 'Username missing.'});
-  }
-  const user = await selectUserByNameAndPassword(username, password);
-  if (user) {
-    res.json({message: 'login ok', user});
-  } else {
-    res.status(401).json({message: 'Bad username/password.'});
-  }
-};
-
-export {getUsers, getUserById, addUser, editUser, deleteUser, login};
+export {getUsers, getUserById, addUser, editUser, deleteUser};

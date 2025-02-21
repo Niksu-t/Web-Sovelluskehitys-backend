@@ -84,6 +84,42 @@ content-type: application/json
   "password": "passwordx"
 }
 
-###
+### get my user info
 GET http://localhost:3000/api/auth/me
-Authorization: Bearer <put-your-token-from-login-response-here>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+### post a new entry
+POST http://localhost:3000/api/entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+content-type: application/json
+
+{
+ "entry_date": "2025-02-12",
+ "mood": "iloinen",
+ "weight": 60,
+ "sleep_hours": 6,
+ "notes": "tosi kiva fiilis"
+}
+
+
+
+
+### Get user's entries
+GET http://localhost:3000/api/entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+###
+PUT http://localhost:3000/api/entries/9
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+Content-Type: application/json
+
+{
+ "entry_date": "2025-02-21",
+ "mood": "surullinen",
+ "weight": 40,
+ "sleep_hours": 2,
+ "notes": "Javascript hajottaa"
+}
+
+
+###
+DELETE http://localhost:3000/api/entries/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg

@@ -1,3 +1,4 @@
+
 // mock data (tilapäistä testidataa)
 const items = [
   {id: 1, name: 'Omena'},
