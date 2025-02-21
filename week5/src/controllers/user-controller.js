@@ -3,7 +3,9 @@ import {
   insertUser,
   selectAllUsers,
   selectUserById,
+  editUser,
 } from '../models/user-model.js';
+import e from 'express';
 
 // kaikkien käyttäjätietojen haku
 const getUsers = async (req, res) => {
@@ -67,6 +69,19 @@ const updateUser = (req, res) => {
   console.log('editUser request body', req.body);
   const user_id = req.params.id;
   const {username, email, password} = req.body;
+  if (username && email && password) {
+    console.log('User content valid');
+    const user = {
+      username,
+      email,
+      password,
+    };
+    editUser(user_id,user);
+    res.json({message: 'User updated.'});
+  }
+  else {
+    res.status(400).json({message: 'Invalid user data'});
+  }
 };
 
 // Userin poisto id:n perusteella (TODO: käytä DB)

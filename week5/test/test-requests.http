@@ -80,8 +80,8 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-  "username": "newusername",
-  "password": "passwordx"
+  "username": "editedname",
+  "password": "editedpasswordx",
 }
 
 ### get my user info
@@ -119,7 +119,16 @@ Content-Type: application/json
  "notes": "Javascript hajottaa"
 }
 
+###
+PUT http://localhost:3000/api/users/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+content-type: application/json
 
+{
+  "username": "editedname",
+  "password": "editedpasswordx",
+  "email": "editedmail@example.com"
+}
 ###
 DELETE http://localhost:3000/api/entries/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg

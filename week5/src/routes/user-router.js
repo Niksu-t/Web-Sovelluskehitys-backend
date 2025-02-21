@@ -2,7 +2,7 @@ import express from 'express';
 import {
   addUser,
   deleteUser,
-  editUser,
+  updateUser,
   getUserById,
   getUsers,
 } from '../controllers/user-controller.js';
@@ -18,7 +18,7 @@ userRouter.route('/')
 // all routes to /api/users/:id
 userRouter.route('/:id')
   .get(getUserById)
-  .put(authenticateToken, checkAuthUsers, editUser)
+  .put(authenticateToken, checkAuthUsers, updateUser)
   .delete(deleteUser);
 
 export default userRouter;
