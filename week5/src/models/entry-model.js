@@ -55,5 +55,27 @@ const editEntry = async (userId, entryId, entry) => {
     throw new Error('database error');
   }
 }
+const selectEntriesByIds = async (userId, entryId) => {
+  try {
+    const [rows] = await promisePool.query(
+    'SELECT * FROM DiaryEntries WHERE entry_id=?',
+    [entryId],
+    );
+    console.log(rows[0]);
+    const resultUserId = rows[0].user_id;
+    if (resultUserId != userId) {
+      console.log('User id does not match');
+      return false;
+    } else {
+      console.log('User id matches');
+      return true;
+    }
 
-export {insertEntry, selectEntriesByUserId, deleteEntryByIds, editEntry};
+  } catch (error) {
+    console.error(error);
+    throw new Error('database error');
+  }
+  
+}
+
+export {insertEntry, selectEntriesByUserId, deleteEntryByIds, editEntry, selectEntriesByIds};

@@ -2,10 +2,10 @@ import express from 'express';
 import {
   getEntries,
   postEntry,
-  editEntry,
+  updateEntry,
   deleteEntry,
 } from '../controllers/entry-controller.js';
-import {authenticateToken} from '../middleware/authentication.js';
+import {authenticateToken, checkAuthEntries} from '../middleware/authentication.js';
 
 const entryRouter = express.Router();
 
@@ -16,6 +16,6 @@ entryRouter
   .get(authenticateToken, getEntries);
 entryRouter
   .route('/:id')
-  .delete(authenticateToken, deleteEntry)
-  .put(authenticateToken, editEntry);
+  .delete(authenticateToken, checkAuthEntries, deleteEntry)
+  .put(authenticateToken, checkAuthEntries, updateEntry);
 export default entryRouter;

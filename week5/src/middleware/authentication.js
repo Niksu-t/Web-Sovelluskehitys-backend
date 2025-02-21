@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import { selectEntriesByIds } from '../models/entry-model.js';
+import { selectUserById } from '../models/user-model.js';
 
 const authenticateToken = (req, res, next) => {
   console.log('authenticateToken', req.headers);
@@ -17,4 +19,23 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-export {authenticateToken};
+const checkAuthEntries = async (req, res, next) => {
+    const result =  await selectEntriesByIds(req.user.user_id, req.params.id);
+    if(result == false){
+      res.sendStatus(401);
+    }
+    else {
+       next();
+    };
+};
+const checkAuthUsers = async (req, res, next) => {
+  const result = await selectUserById(req.user.user_id);
+  if(result == false){
+    res.sendStatus(401);
+  }
+  else {
+     next();
+  };
+};
+
+export {authenticateToken, checkAuthEntries, checkAuthUsers};
