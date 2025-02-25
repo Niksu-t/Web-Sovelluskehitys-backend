@@ -42,9 +42,9 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "newusername",
-  "password": "passwordx",
-  "email": "newemail@example.com"
+  "username": "melooni2",
+  "password": "meloonix",
+  "email": "meloonix@example.com"
 }
 
 ### modify an existing user by id
@@ -65,8 +65,8 @@ POST http://localhost:3000/api/users/login
 content-type: application/json
 
 {
-  "username": "newusername",
-  "password": "passwordx"
+  "username": "melooni2",
+  "password": "meloonix"
 }
 ###
 
@@ -80,8 +80,8 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-  "username": "editedname",
-  "password": "editedpasswordx",
+  "username": "melooni2",
+  "password": "meloonix"
 }
 
 ### get my user info
