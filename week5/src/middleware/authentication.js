@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import { selectEntriesByIds } from '../models/entry-model.js';
-import { selectUserById } from '../models/user-model.js';
 
 const authenticateToken = (req, res, next) => {
   console.log('authenticateToken', req.headers);
