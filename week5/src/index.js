@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import {addItem, deleteItem, editItem, getItemById, getItems} from './items.js';
-
+import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 import userRouter from './routes/user-router.js';
 import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
@@ -18,6 +18,8 @@ app.use(cors());
 app.use('/', express.static('public'));
 // middleware, joka lukee json data POST-pyyntöjen rungosta (body)
 app.use(express.json());
+
+
 
 // rest-apin resurssit tarjoillaan /api/-polun alla
 app.get('/api/', (req, res) => {
@@ -41,6 +43,10 @@ app.get('/api/items/:id', getItemById);
 app.post('/api/items', addItem);
 app.put('/api/items/:id', editItem);
 app.delete('/api/items/:id', deleteItem);
+
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 // palvelimen käynnistys lopuksi kaikkien määritysten jälkeen
 app.listen(port, hostname, () => {

@@ -1,12 +1,24 @@
+import { validationResult } from 'express-validator';
 import {
   deleteEntryByIds,
   insertEntry,
   editEntry,
   selectEntriesByUserId,
 } from '../models/entry-model.js';
-const postEntry = async (req, res) => {
-  // user_id, entry_date, mood, weight, sleep_hours, notes
-  // TODO: add try-catch
+const postEntry = async (req, res, next) => {
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+
+    console.log('postEntry errors', errors.array());
+    const error = new Error('Invalid or missing fields');
+    error.status = 400;
+
+
+    return error(next);
+  }
+
   const newEntry = req.body;
   console.log(req.body);
   newEntry.user_id = req.user.user_id;

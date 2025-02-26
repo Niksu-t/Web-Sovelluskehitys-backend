@@ -42,9 +42,10 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "melooni2",
-  "password": "meloonix",
-  "email": "meloonix@example.com"
+  "username": "melooni5",
+  "password": "melooni4x",
+  "email" : "melooni4@mahtava.fi"
+  
 }
 
 ### modify an existing user by id
@@ -89,14 +90,14 @@ GET http://localhost:3000/api/auth/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
 ### post a new entry
 POST http://localhost:3000/api/entries
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNywidXNlcm5hbWUiOiJtZWxvb25pMiIsInBhc3N3b3JkIjoiJDJiJDEwJDRPa2lMWEJQejIudU5BVmlZQ2xvck9qdW1VNUlWR0gva1NseGRtUGJGMm9WaThEZkRHakRhIiwiZW1haWwiOiJtZWxvb25pQG1haHRhdmEuZmkiLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yNlQxMjoxOTowOC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDA1NzIzNTUsImV4cCI6MTc0MDY1ODc1NX0.jtTTX2iQ5wboiUvWuH8PcVsUgHS5LkwPemdfHpBpZAc
 content-type: application/json
 
 {
- "entry_date": "2025-02-12",
- "mood": "iloinen",
- "weight": 60,
- "sleep_hours": 6,
+ "entry_date": "",
+ "mood": 2,
+ "weight": "str",
+ "sleep_hours": 30,
  "notes": "tosi kiva fiilis"
 }
 

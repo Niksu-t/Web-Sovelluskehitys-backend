@@ -1,11 +1,12 @@
 import bcrypt from 'bcryptjs';
+import { validationResult } from 'express-validator';
 import {
   insertUser,
   selectAllUsers,
   selectUserById,
   editUser,
 } from '../models/user-model.js';
-import e from 'express';
+
 
 // kaikkien käyttäjätietojen haku
 const getUsers = async (req, res) => {
@@ -34,8 +35,22 @@ const getUserById = async (req, res) => {
 
 // käyttäjän lisäys (rekisteröinti)
 // lisätään parempi virheenkäsittely myöhemmin
-const addUser = async (req, res) => {
+const addUser = async (req, res, next) => {
   console.log('addUser request body', req.body);
+
+
+  const errors = validationResult(req);
+  console.log(errors.array());
+  if (!errors.isEmpty()){
+    // annetaan virhe virheen käsittelijälle
+    const error = new Error ('Invalid or missing fields');
+    error.status = 400;
+
+    // palautetaan json viesti missä nähdään virheet
+    return next(error);
+  } 
+
+
   // esitellään 3 uutta muuttujaa, johon sijoitetaan req.body:n vastaavien propertyjen arvot
   const {username, password, email} = req.body;
   // tarkistetaan, että pyynnössä on kaikki tarvittavat tiedot

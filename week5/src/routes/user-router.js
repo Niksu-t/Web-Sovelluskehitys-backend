@@ -1,19 +1,24 @@
 import express from 'express';
 import {
-  addUser,
   deleteUser,
   updateUser,
   getUserById,
   getUsers,
+  addUser
 } from '../controllers/user-controller.js';
 import { authenticateToken, checkAuthUsers } from '../middleware/authentication.js';
+import {body} from 'express-validator';
 const userRouter = express.Router();
 
 // all routes to /api/users
 userRouter.route('/')
   // only logged in user can fetch the user list
   .get(authenticateToken, getUsers)
-  .post(addUser);
+  .post(
+    body('username').trim().isLength({min: 3, max: 20}).isAlphanumeric(),
+    body('password').trim().isLength({min: 8}),
+    body('email').trim().isEmail(),
+    addUser);
 
 // all routes to /api/users/:id
 userRouter.route('/:id')
