@@ -5,7 +5,8 @@ import {authenticateToken} from '../middleware/authentication.js';
 const authRouter = express.Router();
 
 // post to /api/auth/login
-authRouter.post('/login', login);
+authRouter.post('/login',
+     login);
 authRouter.get('/me', authenticateToken, getMe);
 
 export default authRouter;

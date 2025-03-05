@@ -1,22 +1,34 @@
-
+import {validationResult} from 'express-validator';
 
 const notFoundHandler = (req, res, next) => {
-    const error = new Error(`Not found - ${req.originalUrl}`);
+  const error = new Error(`Not found - ${req.originalUrl}`);
 
-    error.status = 404;
-    next(error);
+  error.status = 404;
+  next(error);
 };
 
+const validationErrorHandler = (req, res, next) => {
+  const errors = validationResult(req, {strictParams: ['body']});
 
-const errorHandler = (err, req, res, next ) => {
-    res.status(err.status || 500);
-    res.json({
-        error: {
-            message: err.message,
-            status: err.status || 500
-        }
+  if (!errors.isEmpty()) {
+    const error = new Error('Bad request', 400);
+    error.status = 400;
+    error.errors = errors.array({onlyFirstError: true}).map((error) => {
+      return {field: error.path, message: error.msg};
     });
-    next();
+    return next(error);
+  }
+  next();
 };
 
-export {notFoundHandler, errorHandler};
+const errorHandler = (err, req, res, next) => {
+  res.status(err.status || 500);
+  res.json({
+    message: err.message,
+    status: err.status || 500,
+    errors: err.errors,
+  });
+  next();
+};
+
+export {notFoundHandler, errorHandler, validationErrorHandler};

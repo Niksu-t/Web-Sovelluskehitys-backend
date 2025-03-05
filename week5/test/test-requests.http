@@ -42,10 +42,9 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "melooni5",
-  "password": "melooni4x",
-  "email" : "melooni4@mahtava.fi"
-  
+  "username" : "melooni20",
+  "password" : "melooni20",
+  "email": "awdawd"
 }
 
 ### modify an existing user by id
@@ -94,11 +93,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNywid
 content-type: application/json
 
 {
- "entry_date": "",
- "mood": 2,
- "weight": "str",
- "sleep_hours": 30,
- "notes": "tosi kiva fiilis"
+ "entry_date": "26-02-2025",
+ "mood": "",
+ "weight": "",
+ "sleep_hours": "",
+ "notes": "" 
 }
 
 
