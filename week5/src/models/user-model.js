@@ -95,12 +95,31 @@ const selectUserByUsername = async (username) => {
   }
 };
 
+
+// Modifies user data.
 const editUser = async (userId, user) => {
   console.log(' Received data: ', userId, user);
   try {
+    // Tries to update user data according to parameters from user.
     const [rows] = await promisePool.query(
       'UPDATE Users SET username=?, password=?, email=? WHERE user_id=?',
       [user.username, user.password, user.email, userId],
+    );
+    console.log(rows);
+    // Palauttaa päivitetyt tiedot
+    return rows[0];
+  } catch (error) {
+    console.error(error);
+    throw new Error('database error');
+  }
+};
+// Deletes user data
+const deleteUser = async (userId) => {
+  console.log(' Received data: ', userId);
+  try {
+    const [rows] = await promisePool.query(
+      'DELETE FROM Users WHERE user_id=?',
+      [userId],
     );
     console.log(rows);
     return rows[0];
@@ -108,7 +127,7 @@ const editUser = async (userId, user) => {
     console.error(error);
     throw new Error('database error');
   }
-};
+}
 
 export {
   selectAllUsers,
@@ -117,4 +136,5 @@ export {
   selectUserByNameAndPassword,
   selectUserByUsername,
   editUser,
+  deleteUser
 };

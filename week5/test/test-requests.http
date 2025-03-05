@@ -42,9 +42,10 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username" : "melooni20",
+  "username" : "melooni21",
   "password" : "melooni20",
-  "email": "awdawd"
+  "email": "melooni1@melooni.fi",
+  "user_level": "1"
 }
 
 ### modify an existing user by id
@@ -61,12 +62,12 @@ content-type: application/json
 DELETE http://localhost:3000/api/users/3
 
 ### user login
-POST http://localhost:3000/api/users/login
+POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-  "username": "melooni2",
-  "password": "meloonix"
+  "username" : "melooni21",
+  "password" : "melooni20"
 }
 ###
 
@@ -86,18 +87,18 @@ content-type: application/json
 
 ### get my user info
 GET http://localhost:3000/api/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6Im1lbG9vbmkyMSIsInBhc3N3b3JkIjoiJDJiJDEwJEJrT1dFQVA1RThmWTdJcDduWEMwTHVjOVFzREYvbFpoa2EzcXJCMkNvTGw5TFRvZ0l3LkZlIiwiZW1haWwiOiJtZWxvb25pMUBtZWxvb25pLmZpIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDMtMDVUMTE6NDc6MzQuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQxMTc1NDIwLCJleHAiOjE3NDEyNjE4MjB9.W1WvbUDsaqWBPiNASukvyYfbcmy2L-OeSPLNtFHYjkc
 ### post a new entry
 POST http://localhost:3000/api/entries
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNywidXNlcm5hbWUiOiJtZWxvb25pMiIsInBhc3N3b3JkIjoiJDJiJDEwJDRPa2lMWEJQejIudU5BVmlZQ2xvck9qdW1VNUlWR0gva1NseGRtUGJGMm9WaThEZkRHakRhIiwiZW1haWwiOiJtZWxvb25pQG1haHRhdmEuZmkiLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yNlQxMjoxOTowOC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDA1NzIzNTUsImV4cCI6MTc0MDY1ODc1NX0.jtTTX2iQ5wboiUvWuH8PcVsUgHS5LkwPemdfHpBpZAc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6Im1lbG9vbmkyMSIsInBhc3N3b3JkIjoiJDJiJDEwJEJrT1dFQVA1RThmWTdJcDduWEMwTHVjOVFzREYvbFpoa2EzcXJCMkNvTGw5TFRvZ0l3LkZlIiwiZW1haWwiOiJtZWxvb25pMUBtZWxvb25pLmZpIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDMtMDVUMTE6NDc6MzQuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQxMTc1NDIwLCJleHAiOjE3NDEyNjE4MjB9.W1WvbUDsaqWBPiNASukvyYfbcmy2L-OeSPLNtFHYjkc
 content-type: application/json
 
 {
- "entry_date": "26-02-2025",
- "mood": "",
- "weight": "",
- "sleep_hours": "",
- "notes": "" 
+ "entry_date": "2025-02-21",
+ "mood": "Happy",
+ "weight": 60,
+ "sleep_hours": 10,
+ "notes": "Testing the API" 
 }
 
 
@@ -105,7 +106,7 @@ content-type: application/json
 
 ### Get user's entries
 GET http://localhost:3000/api/entries
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6Im1lbG9vbmkyMSIsInBhc3N3b3JkIjoiJDJiJDEwJEJrT1dFQVA1RThmWTdJcDduWEMwTHVjOVFzREYvbFpoa2EzcXJCMkNvTGw5TFRvZ0l3LkZlIiwiZW1haWwiOiJtZWxvb25pMUBtZWxvb25pLmZpIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDMtMDVUMTE6NDc6MzQuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQxMTc1NDIwLCJleHAiOjE3NDEyNjE4MjB9.W1WvbUDsaqWBPiNASukvyYfbcmy2L-OeSPLNtFHYjkc
 ###
 PUT http://localhost:3000/api/entries/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
@@ -130,5 +131,5 @@ content-type: application/json
   "email": "editedmail@example.com"
 }
 ###
-DELETE http://localhost:3000/api/entries/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwicGFzc3dvcmQiOiIkMmIkMTAkcklIUnZFbE4wWENBZGU2VzRRbzh4Lm16SW1Td0pVR0JuL1phWVJuQzd5dFZqaHVPUy9wUFciLCJlbWFpbCI6Im5ld2VtYWlsQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMjFUMTk6MTA6MjMuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQwMTY1ODY1LCJleHAiOjE3NDAyNTIyNjV9.AweujjID0xXXnECYIhCU_WwzH60gvbBQiYCUjdMFjxg
+DELETE http://localhost:3000/api/entries/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6Im1lbG9vbmkyMSIsInBhc3N3b3JkIjoiJDJiJDEwJEJrT1dFQVA1RThmWTdJcDduWEMwTHVjOVFzREYvbFpoa2EzcXJCMkNvTGw5TFRvZ0l3LkZlIiwiZW1haWwiOiJtZWxvb25pMUBtZWxvb25pLmZpIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDMtMDVUMTE6NDc6MzQuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzQxMTc1NDIwLCJleHAiOjE3NDEyNjE4MjB9.W1WvbUDsaqWBPiNASukvyYfbcmy2L-OeSPLNtFHYjkc

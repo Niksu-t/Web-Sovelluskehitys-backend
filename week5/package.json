@@ -1,7 +1,7 @@
 {
   "name": "week5",
   "version": "1.0.0",
-  "description": "Assingment for week 5",
+  "description": "Project",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Niko-Tiesmaki/BackEnd/tree/authentication"
+    "url": "https://github.com/Niksu-t/Web-sovelluskehitys-projekti"
   },
   "author": "Niko Tiesmäki",
   "license": "ISC",

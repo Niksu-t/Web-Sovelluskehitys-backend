@@ -64,7 +64,7 @@ const addUser = async (req, res) => {
   });
 };
 
-// Userin muokkaus id:n perusteella (TODO: käytä DB)
+
 const updateUser = (req, res) => {
   console.log('editUser request body', req.body);
   const user_id = req.params.id;
@@ -84,18 +84,15 @@ const updateUser = (req, res) => {
   }
 };
 
-// Userin poisto id:n perusteella (TODO: käytä DB)
+// Userin poisto id:n perusteella
 const deleteUser = (req, res) => {
   console.log('deleteUser', req.params.id);
-  const index = users.findIndex((user) => user.id == req.params.id);
-  //console.log('index', index);
-  // findIndex returns -1 if user is not found
-  if (index !== -1) {
-    // remove one user from array based on index
-    users.splice(index, 1);
+  const userId = req.params.id;
+  try {
+    deleteUser(userId);
     res.json({message: 'User deleted.'});
-  } else {
-    res.status(404).json({message: 'User not found'});
+  } catch (error) {
+    res.status(500).json({message: error.message});
   }
 };
 
